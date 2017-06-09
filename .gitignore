@@ -1,0 +1,26 @@
+/***************************************************************************
+3. Реализуйте функцию, которая позволяет преобразовать 64-битное значение
+данных из big-endian порядка в little-endian или наоборот. Например:
+если в качестве параметра функции передать ей данные в little-endian
+она вернет данные в big-endian.
+*****************************************************************************/
+
+unsigned long long endian_convert(unsigned long long  slovo_64bit)
+{unsigned char temp,i=0;
+ unsigned long long  slovo_tmp;
+  do{
+     temp=(char*)(slovo_64bit>>(i*8));
+     slovo_tmp=(slovo_tmp<<8)|temp;
+  }while((i++)<7);
+  
+  return slovo_tmp;
+}
+
+int main()
+{unsigned long long  slovo_big_endian,slovo_little_endian;
+
+slovo_big_endian=endian_convert(0x7a6a5a4a3a2a1a0a);  // slovo_big_endian будет 0x0a1a2a3a4a5a6a7a
+slovo_little_endian=endian_convert(0x0a1a2a3a4a5a6a7a); //slovo_little_endian будет 0x7a6a5a4a3a2a1a0a
+
+return 0;
+}
